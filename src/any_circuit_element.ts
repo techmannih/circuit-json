@@ -173,10 +173,10 @@ type FindMissingId<T extends AnyCircuitElement> = T extends {
   type: infer U extends string
 }
   ? T extends { [K in `${U}_id`]: infer V }
-  ? V extends string
-  ? never
-  : `${U} DOES NOT HAVE AN ${U}_id PROPERTY`
-  : `${U} DOES NOT HAVE AN ${U}_id PROPERTY`
+    ? V extends string
+      ? never
+      : `${U} DOES NOT HAVE AN ${U}_id PROPERTY`
+    : `${U} DOES NOT HAVE AN ${U}_id PROPERTY`
   : never
 
 expectStringUnionsMatch<
