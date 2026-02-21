@@ -46,6 +46,7 @@ export const any_circuit_element = z.union([
   src.source_pin_missing_trace_warning,
   src.source_pin_must_be_connected_error,
   src.unknown_error_finding_part,
+  src.source_i2c_pin_connection_error,
   pcb.pcb_component,
   pcb.pcb_hole,
   pcb.pcb_missing_footprint_error,
@@ -172,10 +173,10 @@ type FindMissingId<T extends AnyCircuitElement> = T extends {
   type: infer U extends string
 }
   ? T extends { [K in `${U}_id`]: infer V }
-    ? V extends string
-      ? never
-      : `${U} DOES NOT HAVE AN ${U}_id PROPERTY`
-    : `${U} DOES NOT HAVE AN ${U}_id PROPERTY`
+  ? V extends string
+  ? never
+  : `${U} DOES NOT HAVE AN ${U}_id PROPERTY`
+  : `${U} DOES NOT HAVE AN ${U}_id PROPERTY`
   : never
 
 expectStringUnionsMatch<
